@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartOrderFood - Menú</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --primary-orange: #FF521B;
+            --primary-gradient: linear-gradient(135deg, #FF521B 0%, #FF7A00 100%);
+            --bg-soft-cream: #FAFAFA;
+            --card-border-radius: 24px;
+            --text-dark: #1A1A1A;
+            --text-muted: #737373;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-soft-cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navbar personalizado */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--text-dark) !important;
+            padding: 0.5rem 0.8rem !important;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-orange) !important;
+            background: rgba(255, 82, 27, 0.08);
+        }
+
+        /* Botones y Elementos */
+        .btn-primary-orange {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            padding: 0.75rem 1.5rem;
+            box-shadow: 0 10px 25px rgba(255, 82, 27, 0.25);
+            transition: all 0.25s ease;
+        }
+
+        .btn-primary-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(255, 82, 27, 0.35);
+            color: #ffffff;
+        }
+
+        /* Tarjetas de Producto UI */
+        .product-card {
+            background: #FFFFFF;
+            border-radius: var(--card-border-radius);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-image-container {
+            background: #FFF0E8;
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Pills de Categorías */
+        .category-pill {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 0.65rem 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .category-pill.active, .category-pill:hover {
+            background: var(--primary-orange);
+            color: #ffffff;
+            border-color: var(--primary-orange);
+            box-shadow: 0 8px 20px rgba(255, 82, 27, 0.25);
+        }
+
+        /* Botón Flotante de Carrito / Reserva */
+        .floating-action-bar {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1A1A1A;
+            color: white;
+            border-radius: 50px;
+            padding: 12px 28px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR NAVEGACIÓN COMPLETA -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-extrabold fs-4 text-dark d-flex align-items-center gap-2" href="index.html">
+                <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+                    <i class="bi bi-shop fs-5"></i>
+                </div>
+                <span style="letter-spacing: -0.5px;">SmartOrder<span style="color: var(--primary-orange);">Food</span></span>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1 mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu.html"><i class="bi bi-grid-fill me-1"></i> Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-envelope-fill me-1"></i> Contacto</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary-orange btn-sm text-white px-3" href="login.html">
+                            Iniciar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-5 mb-5">
+
+        <!-- ENCABEZADO DE SECCIÓN -->
+        <div class="text-center mb-5">
+            <span class="badge rounded-pill bg-warning text-dark px-3 py-2 mb-2 fw-bold">
+                🍽️ CARTA DIGITAL
+            </span>
+            <h1 class="fw-extrabold display-5 mt-2" style="letter-spacing: -1px;">
+                Nuestros <span style="color: var(--primary-orange);">Alimentos</span>
+            </h1>
+            <p class="text-muted mx-auto" style="max-width: 500px;">
+                Consulta nuestros productos preparados al momento y realiza tu pedido o reserva para disfrutar sin esperas[cite: 6].
+            </p>
+        </div>
+
+        <!-- FILTROS DE CATEGORÍAS -->
+        <div class="d-flex justify-content-center gap-2 overflow-x-auto pb-4 mb-4" style="scrollbar-width: none;">
+            <div class="category-pill active">
+                <span>🔥</span> Todos
+            </div>
+            <div class="category-pill">
+                <span>🍔</span> Hamburguesas
+            </div>
+            <div class="category-pill">
+                <span>🍝</span> Pastas
+            </div>
+            <div class="category-pill">
+                <span>🍕</span> Pizzas
+            </div>
+            <div class="category-pill">
+                <span>🥤</span> Bebidas
+            </div>
+        </div>
+
+        <!-- CUADRÍCULA DE PRODUCTOS DINÁMICA -->
+        <div class="row g-4" id="contenedorMenuCliente">
+            <!-- Los platillos se cargan dinámicamente desde js.js -->
+        </div>
+
+        <!-- ACCIÓN INFERIOR / CONTINUAR -->
+        <div class="text-center mt-5 pt-3">
+            <button onclick="requiereSesion('reservacion.html')" class="btn btn-lg btn-primary-orange px-5 text-white shadow-lg rounded-pill">
+                <i class="bi bi-calendar-check me-2"></i> Reservar mesa y continuar
+            </button>
+        </div>
+
+    </main>
+
+    <!-- BARRA FLOTANTE DE ACCIÓN RÁPIDA -->
+    <div class="floating-action-bar shadow-lg">
+        <div class="d-flex align-items-center gap-2">
+            <i class="bi bi-basket-fill text-warning fs-5"></i>
+            <span class="fw-bold small">Catálogo interactivo activo</span>
+        </div>
+        <a href="#" onclick="requiereSesion('reservacion.html')" class="btn btn-sm btn-primary-orange text-white rounded-pill px-3">
+            Ver Reservación
+        </a>
+    </div>
+
+    <!-- FOOTER MODERNO Y ELEGANTE -->
+    <footer class="bg-white border-top py-4 mt-5 text-center">
+        <div class="container">
+            <p class="text-muted small m-0">SmartOrderFood &copy; 2026. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de funcionalidad -->
+    <script src="js.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            cargarMenuCliente();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

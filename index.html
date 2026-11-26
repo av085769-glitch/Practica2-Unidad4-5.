@@ -1,0 +1,493 @@
+<<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartOrderFood - Inicio</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --primary-orange: #FF521B;
+            --primary-gradient: linear-gradient(135deg, #FF521B 0%, #FF7A00 100%);
+            --bg-soft-cream: #FAFAFA;
+            --card-border-radius: 24px;
+            --text-dark: #1A1A1A;
+            --text-muted: #737373;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-soft-cream);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navbar personalizado */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--text-dark) !important;
+            padding: 0.5rem 0.8rem !important;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-orange) !important;
+            background: rgba(255, 82, 27, 0.08);
+        }
+
+        /* Botones estilo UI App */
+        .btn-primary-orange {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            font-weight: 700;
+            border: none;
+            border-radius: 16px;
+            padding: 0.85rem 1.75rem;
+            box-shadow: 0 10px 25px rgba(255, 82, 27, 0.25);
+            transition: all 0.25s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .btn-primary-orange:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(255, 82, 27, 0.35);
+            color: #ffffff;
+        }
+
+        .btn-light-custom {
+            background: #F3F4F6;
+            color: var(--text-dark);
+            font-weight: 700;
+            border-radius: 16px;
+            border: none;
+            padding: 0.85rem 1.5rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-light-custom:hover {
+            background: #E5E7EB;
+            color: var(--text-dark);
+        }
+
+        /* Tarjetas de diseño UI */
+        .ui-card {
+            background: #FFFFFF;
+            border-radius: var(--card-border-radius);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .ui-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Banner Hero estilo App */
+        .hero-banner {
+            background: var(--primary-gradient);
+            border-radius: 32px;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Categorías con Scroll Horizontal estilizado */
+        .category-pill {
+            background: #FFFFFF;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 0.75rem 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .category-pill.active, .category-pill:hover {
+            background: var(--primary-orange);
+            color: #ffffff;
+            border-color: var(--primary-orange);
+            box-shadow: 0 8px 20px rgba(255, 82, 27, 0.25);
+        }
+
+        /* Simulación de Badge de Orden Rápidas */
+        .order-badge {
+            background: rgba(255, 82, 27, 0.1);
+            color: var(--primary-orange);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        .search-bar-custom {
+            background: #FFFFFF;
+            border-radius: 18px;
+            border: 1px solid #E5E7EB;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+        }
+
+        .search-bar-custom input {
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* Botón flotante de Carrito Rápido */
+        .floating-cart-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50px;
+            padding: 14px 24px;
+            font-weight: 700;
+            box-shadow: 0 12px 30px rgba(255, 82, 27, 0.4);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .floating-cart-btn:hover {
+            color: white;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR NAVEGACIÓN COMPLETA -->
+    <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fw-extrabold fs-4 text-dark d-flex align-items-center gap-2" href="index.html">
+                <div class="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 40px; height: 40px;">
+                    <i class="bi bi-shop fs-5"></i>
+                </div>
+                <span style="letter-spacing: -0.5px;">SmartOrder<span style="color: var(--primary-orange);">Food</span></span>
+            </a>
+
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="navbar-nav ms-auto align-items-lg-center gap-1 mt-3 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html"><i class="bi bi-grid-fill me-1"></i> Menú</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="requiereSesion('reservacion.html')"><i class="bi bi-calendar-check-fill me-1"></i> Reservar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="requiereSesion('calificacion.html')"><i class="bi bi-star-fill me-1"></i> Calificar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="suscripcion.html"><i class="bi bi-gift-fill me-1"></i> Club VIP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="requiereSesion('facturacion.html')"><i class="bi bi-receipt me-1"></i> Facturación</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contacto.html"><i class="bi bi-envelope-fill me-1"></i> Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="requiereSesion('perfil.html')"><i class="bi bi-person-fill me-1"></i> Perfil</a>
+                    </li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-primary-orange btn-sm text-white px-3" href="login.html">
+                            Iniciar sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4 py-lg-5">
+
+        <!-- HEADER / BARRA DE BÚSQUEDA Y UBICACIÓN -->
+        <div class="row align-items-center mb-4 g-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center gap-2 text-muted small fw-bold mb-1">
+                    <i class="bi bi-geo-alt-fill text-danger"></i> ENTREGAR EN / MESA:
+                </div>
+                <h5 class="fw-bold m-0 d-flex align-items-center gap-2">
+                    Mesa #12 - Zona Principal <i class="bi bi-chevron-down text-muted fs-6"></i>
+                </h5>
+            </div>
+            <div class="col-md-6">
+                <div class="search-bar-custom d-flex align-items-center">
+                    <i class="bi bi-search text-muted fs-5 me-2"></i>
+                    <input type="text" class="form-control" placeholder="¿Qué se te antoja hoy? (ej. Hamburguesa, Pizza...)">
+                    <button class="btn btn-light-custom btn-sm rounded-3 px-3">Buscar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO BANNER EN MODO TARJETA APP -->
+        <section class="hero-banner p-4 p-md-5 mb-5 shadow-lg">
+            <div class="row align-items-center">
+                <div class="col-lg-7 z-1">
+                    <span class="badge bg-white text-dark rounded-pill px-3 py-2 mb-3 fw-bold shadow-sm">
+                        🔥 ¡Envío Rápido a Mesa!
+                    </span>
+                    <h1 class="display-4 fw-extrabold mb-3">
+                        Pide sin filas, <br>disfruta tu momento.
+                    </h1>
+                    <p class="fs-5 opacity-90 mb-4" style="max-width: 520px;">
+                        Escanea, elige tus platillos favoritos con insumos frescos y reserva tu mesa instantáneamente.
+                    </p>
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="menu.html" class="btn btn-light text-dark fw-extrabold rounded-pill px-4 py-3 shadow">
+                            <i class="bi bi-bag-check-fill me-1" style="color: var(--primary-orange);"></i> Ordenar Menú
+                        </a>
+                        <button onclick="requiereSesion('reservacion.html')" class="btn btn-outline-light fw-bold rounded-pill px-4 py-3">
+                            <i class="bi bi-calendar-event me-1"></i> Reservar Mesa
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-5 text-center mt-4 mt-lg-0 z-1">
+                    <div class="bg-white text-dark p-4 rounded-4 shadow-lg display-1 d-inline-block position-relative">
+                        🍔
+                        <div class="position-absolute bottom-0 end-0 bg-warning text-dark fw-bold fs-6 rounded-circle p-2 shadow">
+                            ★ 4.9
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- NAVEGACIÓN POR CATEGORÍAS (SLIDER/PILLS) -->
+        <section class="mb-5">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h4 class="fw-extrabold m-0">Categorías Populares</h4>
+                <a href="menu.html" class="text-decoration-none fw-bold small" style="color: var(--primary-orange);">Ver todo <i class="bi bi-arrow-right"></i></a>
+            </div>
+            
+            <div class="d-flex gap-3 overflow-x-auto pb-2" style="scrollbar-width: none;">
+                <div class="category-pill active">
+                    <span class="fs-5">🔥</span> Todos
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🍔</span> Hamburguesas
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🍕</span> Pizzas
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🍝</span> Pastas
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🌮</span> Tacos
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🥤</span> Bebidas
+                </div>
+                <div class="category-pill">
+                    <span class="fs-5">🍰</span> Postres
+                </div>
+            </div>
+        </section>
+
+        <!-- TARJETAS DE SERVICIOS / FUNCIONALIDADES DESTACADAS -->
+        <section class="mb-5">
+            <h4 class="fw-extrabold mb-4">Servicios Disponibles</h4>
+            
+            <div class="row g-4">
+
+                <!-- TARJETA 1: MENÚ -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">🍔</div>
+                                <span class="order-badge">Menú Interactivo</span>
+                            </div>
+                            <h5 class="fw-bold">Explora la Carta</h5>
+                            <p class="text-muted small">
+                                Visualiza fotos, precios actualizados e ingredientes detallados en tiempo real.
+                            </p>
+                        </div>
+                        <a href="menu.html" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Ver Alimentos</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TARJETA 2: RESERVA -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">📅</div>
+                                <span class="order-badge">Sin Esperas</span>
+                            </div>
+                            <h5 class="fw-bold">Reserva de Mesas</h5>
+                            <p class="text-muted small">
+                                Selecciona el horario conveniente, cantidad de personas y requerimientos especiales.
+                            </p>
+                        </div>
+                        <button onclick="requiereSesion('reservacion.html')" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Hacer Reserva</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TARJETA 3: CALIFICACIÓN -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">⭐</div>
+                                <span class="order-badge">Tu Opinión</span>
+                            </div>
+                            <h5 class="fw-bold">Califica tu Experiencia</h5>
+                            <p class="text-muted small">
+                                Evalúa la calidad de nuestros servicios y déjanos tu retroalimentación.
+                            </p>
+                        </div>
+                        <button onclick="requiereSesion('calificacion.html')" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Calificar Servicio</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TARJETA 4: CLUB VIP / PROMOS -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">🎁</div>
+                                <span class="order-badge">Ofertas</span>
+                            </div>
+                            <h5 class="fw-bold">Club VIP & Cupones</h5>
+                            <p class="text-muted small">
+                                Suscríbete para recibir promociones exclusivas y cupones directos a tu correo.
+                            </p>
+                        </div>
+                        <a href="suscripcion.html" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Unirme al Club</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- TARJETA 5: FACTURACIÓN -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">📄</div>
+                                <span class="order-badge">Fiscal</span>
+                            </div>
+                            <h5 class="fw-bold">Facturación Electrónica</h5>
+                            <p class="text-muted small">
+                                Solicita tu factura CFDI ingresando tus datos fiscales y tu número de ticket.
+                            </p>
+                        </div>
+                        <button onclick="requiereSesion('facturacion.html')" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Solicitar Factura</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TARJETA 6: MI PERFIL -->
+                <div class="col-md-4">
+                    <div class="ui-card p-4 h-100 d-flex flex-column justify-content-between">
+                        <div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <div class="bg-light rounded-4 p-3 display-6">👤</div>
+                                <span class="order-badge">Personalizado</span>
+                            </div>
+                            <h5 class="fw-bold">Mi Perfil y Cuenta</h5>
+                            <p class="text-muted small">
+                                Revisa tus datos personales, información guardada y gestiona tu sesión.
+                            </p>
+                        </div>
+                        <button onclick="requiereSesion('perfil.html')" class="btn btn-light-custom w-100 mt-3 d-flex justify-content-between align-items-center">
+                            <span>Ir a mi Perfil</span>
+                            <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- BOTÓN FLOTANTE PARA CARRITO DE PEDIDO -->
+    <a href="#" onclick="requiereSesion('reservacion.html')" class="floating-cart-btn">
+        <i class="bi bi-bag-fill fs-5"></i>
+        <span>Mi Pedido (0)</span>
+    </a>
+
+    <!-- FOOTER MODERNO Y ELEGANTE -->
+    <footer class="bg-white border-top py-5 mt-5">
+        <div class="container text-center">
+            <a class="navbar-brand fw-extrabold fs-4 text-dark d-inline-flex align-items-center gap-2 mb-3" href="#">
+                <span style="letter-spacing: -0.5px;">SmartOrder<span style="color: var(--primary-orange);">Food</span></span>
+            </a>
+            <p class="text-muted small mb-4" style="max-width: 450px; margin: 0 auto;">
+                La forma más rápida e inteligente de ordenar alimentos y reservar mesa en tu restaurante favorito.
+            </p>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+                <a href="#" class="btn btn-light btn-sm rounded-circle p-2"><i class="bi bi-facebook fs-5"></i></a>
+                <a href="#" class="btn btn-light btn-sm rounded-circle p-2"><i class="bi bi-instagram fs-5"></i></a>
+                <a href="#" class="btn btn-light btn-sm rounded-circle p-2"><i class="bi bi-twitter-x fs-5"></i></a>
+            </div>
+            <p class="text-muted small m-0">&copy; 2026 SmartOrderFood. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts de funcionalidad -->
+    <script src="js.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
